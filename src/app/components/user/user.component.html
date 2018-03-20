@@ -1,0 +1,79 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="breadcrumb-item">
+      <a routerLink="">Home</a>
+    </li>
+    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="breadcrumb-item" aria-current="page">{{name}}</li>
+  </ol>
+</nav>
+
+<div class="user-profile">
+
+  <div class="column-1">
+
+    <h1>{{username}}</h1>
+
+    <div class="d-lg-none d-xs-block">
+
+      <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#details1" aria-expanded="false" aria-controls="details1">
+        {{username}} Details
+      </button>
+
+      <div class="collapse" id="details1">
+        <div id="user-details" class="card card-body">
+          <h5>{{name}}</h5>
+          <h5>{{email}}</h5>
+          <hr>
+          <h5>{{street}}</h5>
+          <h5>{{suite}}</h5>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- POSTS SECTION -->
+    <div *ngFor="let post of posts" class="row">
+      <div class="col-lg-9">
+
+        <h3>{{post.title}}</h3>
+
+        <p>{{post.body}}</p>
+
+        <div>
+          <span class="comments">{{findLength(post.id)}} Comments</span> &nbsp;
+          <i (click)="checkExpandedStatus(post.id).expanded = !checkExpandedStatus(post.id).expanded" [ngClass]="{'fa': true, 'fa-plus': !checkExpandedStatus(post.id).expanded, 'fa-minus': checkExpandedStatus(post.id).expanded}"
+            data-toggle="collapse" [attr.data-target]="'#' + post.id" aria-expanded="false" [attr.aria-controls]="post.id"></i>
+        </div>
+        <div class="collapse" [id]="post.id">
+          <div *ngFor="let comment of findComments(post.id)" class="card card-body">
+            {{comment.body}}
+          </div>
+        </div>
+      </div>
+      <!-- col -->
+    </div>
+    <!-- row -->
+  </div>
+  <!-- column-1 -->
+
+  <div class="column-2 d-none d-lg-block">
+
+    <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#details" aria-expanded="false" aria-controls="details">
+      {{username}} Details
+    </button>
+
+    <div class="collapse" id="details">
+      <div id="user-details" class="card card-body">
+        <h5>{{name}}</h5>
+        <h5>{{email}}</h5>
+        <hr>
+        <h5>{{street}}</h5>
+        <h5>{{suite}}</h5>
+      </div>
+    </div>
+
+  </div>
+  <!-- column-2 -->
+
+</div>
+<!-- user-profile -->

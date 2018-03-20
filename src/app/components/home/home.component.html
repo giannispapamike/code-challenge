@@ -1,0 +1,20 @@
+<h1>Users</h1>
+
+<div *ngIf="subsEval">
+  <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name <i (click)="sortByName()" class="fa fa-sort"></i></th>
+          <th scope="col">Posts <i (click)="sortByPosts()" class="fa fa-sort"></i></th>
+          <th scope="col">Comments/Post <i (click)="sortByCP()" class="fa fa-sort"></i> </th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of usersData">
+        <td><a routerLink="/user/{{user.id}}">{{user.name}}</a></td>
+        <td>{{posts[user.id - 1].posts}}</td>
+        <td>{{cp[user.id - 1].cp}}</td>
+      </tr>
+      </tbody>
+    </table>
+</div>
